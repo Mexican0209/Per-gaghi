@@ -251,6 +251,188 @@
     color: #2c2b2f;
   }
 
+  /* ---------- RICORDI ---------- */
+
+  .memories {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 4vh 6vw 10vh;
+  }
+
+  .memories-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    text-align: center;
+    margin-bottom: 0.8rem;
+  }
+
+  .memories-sub {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+    letter-spacing: 0.03em;
+    margin-bottom: 3.5rem;
+  }
+
+  .memory-grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding: 0 10%;
+    gap: 1.8rem;
+    padding: 0.5rem 10% 1.8rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .memory-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .memory {
+    flex: 0 0 78%;
+    max-width: 380px;
+    display: flex;
+    flex-direction: column;
+    scroll-snap-align: center;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .memory.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .carousel-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.6rem;
+    margin-top: 1.6rem;
+  }
+
+  .carousel-arrow {
+    background: none;
+    border: 1px solid var(--line);
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--ink);
+    transition: border-color 0.3s ease, background 0.3s ease;
+  }
+
+  .carousel-arrow:hover {
+    border-color: var(--accent);
+    background: var(--paper-warm);
+  }
+
+  .carousel-arrow svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .carousel-dots {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .carousel-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--line);
+    transition: background 0.3s ease, transform 0.3s ease;
+  }
+
+  .carousel-dot.active {
+    background: var(--accent);
+    transform: scale(1.3);
+  }
+
+  .memory-frame {
+    aspect-ratio: 1 / 1;
+    border: 1px solid var(--line);
+    padding: 8px;
+  }
+
+  .memory-frame-inner {
+    width: 100%;
+    height: 100%;
+    background: var(--paper-warm);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .memory-frame-inner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+  }
+
+  .memory-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1.2rem;
+    color: var(--muted);
+    font-size: 0.68rem;
+    letter-spacing: 0.03em;
+    line-height: 1.7;
+  }
+
+  .memory-placeholder svg {
+    width: 20px;
+    height: 20px;
+    margin-bottom: 0.7rem;
+    opacity: 0.5;
+  }
+
+  .memory-cap {
+    margin-top: 1rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    text-align: center;
+    color: var(--ink);
+  }
+
+  .memory-meta {
+    margin-top: 0.3rem;
+    text-align: center;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ---------- RINGRAZIAMENTI ---------- */
+
+  .thanks {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 4vh 6vw 10vh;
+  }
+
+  .thanks-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    text-align: center;
+    margin-bottom: 3.5rem;
+  }
+
   /* ---------- CHIUSURA ---------- */
 
   .closing {
@@ -322,7 +504,7 @@
           2. Cambia il src qui sotto in "noi.jpg"
           3. Puoi anche cancellare il div "placeholder-note"
         -->
-        <img src="noi.jpg" alt="Noi due" onerror="this.style.display='none'; document.querySelector('.placeholder-note').style.display='flex';" style="display:none;" onload="this.style.display='block'; document.querySelector('.placeholder-note').style.display='none';">
+        <img src="noi.jpg" alt="Noi due" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" onload="this.style.display='block'; this.nextElementSibling.style.display='none';">
         <div class="placeholder-note" style="display:flex; flex-direction:column; align-items:center;">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="9" cy="10" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L4 21"/></svg>
           metti qui una foto vostra<br>
@@ -334,16 +516,9 @@
   </section>
 
   <section class="letter">
-    <p>C'è un patto segreto tra il mio corpo ed il tuo,</p>
-    <p>è scritto in un linguaggio che il mondo non potrà mai capire </p>
-    <p>è la certezza che se la vita </p>
-    <p>dovesse pretendere qualcosa da noi </p>
-    <p>io mi farei scudo,</p>
-    <p>io mi farei argine per te </p>
-    <p> Non sarò polvere o un lontano ricordo </p>
-    <p>voglio restare linfa nelle tue vene </p>
-    <p>Ti ho aperto ogni porta, ogni cicatrice e ogni pensiero </p>
-    <p> Quindi resta qui, oramai non mi posso piu' perdere </p>
+    <p>Ci sono cose che si dicono meglio scrivendole, con calma, senza fretta di essere interrotti. Questa è una di quelle.</p>
+    <p>Amo il modo in cui rendi ordinaria una giornata qualunque, semplicemente essendoci. Amo come mi ascolti davvero, non solo per rispondere. Amo la persona che divento quando sono con te: più paziente, più leggera, più vera.</p>
+    <p>Non serve un'occasione speciale per dirtelo. Ma visto che ci sono, ho pensato di farlo in modo un po' diverso dal solito.</p>
   </section>
 
   <section class="reasons">
@@ -367,7 +542,114 @@
     </div>
     <div class="reason">
       <span class="mark">—</span>
-      <p>Perché grazie a te ho imparato a sorridere. </p>
+      <p>Perché ogni volta che ti vedo dopo un po' che non ci vediamo, sento ancora quella scarica al petto.</p>
+    </div>
+  </section>
+
+  <section class="memories">
+    <div class="memories-title serif">Un piccolo album di ricordi</div>
+    <div class="memories-sub">scorri per rivederli con me</div>
+
+    <div class="memory-grid" id="memoryGrid">
+
+      <!--
+        COME AGGIUNGERE UN RICORDO:
+        1. Salva la foto nella stessa cartella, con nome tipo "ricordo1.jpg", "ricordo2.jpg", ecc.
+        2. Cambia il src qui sotto
+        3. Modifica la didascalia (memory-cap) e, se vuoi, la riga sotto (memory-meta) con luogo/data
+        4. Copia e incolla un intero blocco ".memory" per aggiungerne altri
+      -->
+      <div class="memory">
+        <div class="memory-frame">
+          <div class="memory-frame-inner">
+            <img src="ricordo1.jpg" alt="Ricordo 1" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" onload="this.style.display='block'; this.nextElementSibling.style.display='none';">
+            <div class="memory-placeholder">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="9" cy="10" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L4 21"/></svg>
+              ricordo1.jpg
+            </div>
+          </div>
+        </div>
+        <div class="memory-cap">il nostro primo viaggio</div>
+        <div class="memory-meta">scrivi qui luogo e data</div>
+      </div>
+
+      <div class="memory">
+        <div class="memory-frame">
+          <div class="memory-frame-inner">
+            <img src="ricordo2.jpg" alt="Ricordo 2" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" onload="this.style.display='block'; this.nextElementSibling.style.display='none';">
+            <div class="memory-placeholder">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="9" cy="10" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L4 21"/></svg>
+              ricordo2.jpg
+            </div>
+          </div>
+        </div>
+        <div class="memory-cap">quella sera senza motivo</div>
+        <div class="memory-meta">scrivi qui luogo e data</div>
+      </div>
+
+      <div class="memory">
+        <div class="memory-frame">
+          <div class="memory-frame-inner">
+            <img src="ricordo3.jpg" alt="Ricordo 3" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" onload="this.style.display='block'; this.nextElementSibling.style.display='none';">
+            <div class="memory-placeholder">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="9" cy="10" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L4 21"/></svg>
+              ricordo3.jpg
+            </div>
+          </div>
+        </div>
+        <div class="memory-cap">una risata qualsiasi</div>
+        <div class="memory-meta">scrivi qui luogo e data</div>
+      </div>
+
+      <div class="memory">
+        <div class="memory-frame">
+          <div class="memory-frame-inner">
+            <img src="ricordo4.jpg" alt="Ricordo 4" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" onload="this.style.display='block'; this.nextElementSibling.style.display='none';">
+            <div class="memory-placeholder">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="9" cy="10" r="1.5"/><path d="M21 16l-5.5-5.5a1 1 0 0 0-1.4 0L4 21"/></svg>
+              ricordo4.jpg
+            </div>
+          </div>
+        </div>
+        <div class="memory-cap">un momento qualunque, reso speciale</div>
+        <div class="memory-meta">scrivi qui luogo e data</div>
+      </div>
+
+    </div>
+
+    <div class="carousel-nav">
+      <button class="carousel-arrow" id="prevBtn" aria-label="Precedente">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 6l-6 6 6 6"/></svg>
+      </button>
+      <div class="carousel-dots" id="carouselDots"></div>
+      <button class="carousel-arrow" id="nextBtn" aria-label="Successivo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <section class="thanks">
+    <div class="thanks-title serif">Grazie, semplicemente</div>
+
+    <div class="reason">
+      <span class="mark">—</span>
+      <p>Grazie per la pazienza, anche quando non la meritavo.</p>
+    </div>
+    <div class="reason">
+      <span class="mark">—</span>
+      <p>Grazie per aver creduto in me nei momenti in cui io non ci riuscivo.</p>
+    </div>
+    <div class="reason">
+      <span class="mark">—</span>
+      <p>Grazie per ogni piccolo gesto quotidiano che sembra scontato e non lo è mai.</p>
+    </div>
+    <div class="reason">
+      <span class="mark">—</span>
+      <p>Grazie per la libertà di essere semplicemente me stesso, senza dover recitare nulla.</p>
+    </div>
+    <div class="reason">
+      <span class="mark">—</span>
+      <p>Grazie per il tempo che mi dedichi, che è la cosa più preziosa che hai.</p>
     </div>
   </section>
 
@@ -375,13 +657,13 @@
     <div class="line"></div>
     <h2 class="serif">Grazie per essere<br>esattamente così.</h2>
     <div class="signature">con tutto quello che ho</div>
-    <div class="date">Tuo gaghino</div>
+    <div class="date">Bari · Luglio 2026</div>
   </section>
 
-  <footer>Ti amo, gaghina.</footer>
+  <footer>fatto con cura, per te</footer>
 
   <script>
-    const reasons = document.querySelectorAll('.reason');
+    const fadeItems = document.querySelectorAll('.reason, .memory');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry, i) => {
         if (entry.isIntersecting) {
@@ -390,7 +672,44 @@
         }
       });
     }, { threshold: 0.2 });
-    reasons.forEach(r => observer.observe(r));
+    fadeItems.forEach(r => observer.observe(r));
+
+    // --- Carosello ricordi ---
+    const grid = document.getElementById('memoryGrid');
+    const slides = grid ? grid.querySelectorAll('.memory') : [];
+    const dotsWrap = document.getElementById('carouselDots');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    if (grid && slides.length) {
+      slides.forEach((_, i) => {
+        const dot = document.createElement('div');
+        dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+        dot.addEventListener('click', () => {
+          slides[i].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        });
+        dotsWrap.appendChild(dot);
+      });
+      const dots = dotsWrap.querySelectorAll('.carousel-dot');
+
+      const slideObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const idx = Array.from(slides).indexOf(entry.target);
+          if (entry.isIntersecting && entry.intersectionRatio > 0.6) {
+            dots.forEach(d => d.classList.remove('active'));
+            dots[idx].classList.add('active');
+          }
+        });
+      }, { root: grid, threshold: [0.6] });
+      slides.forEach(s => slideObserver.observe(s));
+
+      prevBtn.addEventListener('click', () => {
+        grid.scrollBy({ left: -grid.clientWidth * 0.78, behavior: 'smooth' });
+      });
+      nextBtn.addEventListener('click', () => {
+        grid.scrollBy({ left: grid.clientWidth * 0.78, behavior: 'smooth' });
+      });
+    }
   </script>
 
 </body>
